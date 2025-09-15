@@ -1,0 +1,19 @@
+{
+  "name": "projeto-toystory",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["NODEJS", "Toy Story", "Apaixonada por BackEnd"],
+  "author": "Isabela Duetes",
+  "license": "MIT",
+  "description": "API dos Personagens de Toy Story",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
