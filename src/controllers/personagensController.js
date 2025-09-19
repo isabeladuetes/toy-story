@@ -5,7 +5,7 @@ const { toyStorys } = dados;
 const getAllToyStorys = (req, res) => {
   res.status(200).json({
     total: toyStorys.length,
-    toyStorys: toyStorys,
+    toyStorys: toyStorys
   });
 };
 
@@ -15,11 +15,18 @@ const getToyStoryById = (req, res) => {
 
   const toyStory = toyStorys.find((b) => b.id === id);
 
+  if (!toyStory) {
+    return res.status(404).json({
+      success: true,
+      message: "Personagem não encontrado nos registros!"
+    });
+  };
+
   res.status(200).json({
     success: true,
-    toyStory: toyStory,
+    toyStory: toyStory
   });
-};
+}
 
 // Create ToyStory
 const createToyStory = (req, res) => {
@@ -29,7 +36,7 @@ const createToyStory = (req, res) => {
     return res.status(400).json({
       success: false,
       message:
-        "Nome, tipo, ano de fabricação, cor, quantidade no estoque são obrigatórios!",
+        "Nome, tipo, ano de fabricação, cor, quantidade no estoque são obrigatórios!"
     });
   }
 
@@ -39,7 +46,7 @@ const createToyStory = (req, res) => {
     tipo: tipo,
     anoFabricacao: anoFabricacao,
     cor: cor,
-    quantidadeEstoque: quantidadeEstoque,
+    quantidadeEstoque: quantidadeEstoque
   };
 
   // Push no array
@@ -48,7 +55,7 @@ const createToyStory = (req, res) => {
   res.status(201).json({
     success: true,
     message: "Toy Story cadastrado com sucesso!",
-    toyStory: novoToyStory,
+    toyStory: novoToyStory
   });
 };
 
@@ -60,7 +67,7 @@ const deleteToyStory = (req, res) => {
   if (isNaN(id)) {
     return res.status(400).json({
       success: false,
-      message: "ID deve ser um número válido!",
+      message: "ID deve ser um número válido!"
     });
   }
 
@@ -71,7 +78,7 @@ const deleteToyStory = (req, res) => {
   if (!toyStoryParaRemover) {
     return res.status(404).json({
       success: false,
-      message: `Toy Story com ID ${id} não encontrado para remoção!`,
+      message: `Toy Story com ID ${id} não encontrado para remoção!`
     });
   }
 
@@ -86,7 +93,7 @@ const deleteToyStory = (req, res) => {
   res.status(200).json({
     success: true,
     message: `Toy Story ${toyStoryParaRemover.nome} (ID: ${id}) foi removido dos registros.`,
-    toyStoryRemovido: toyStoryParaRemover,
+    toyStoryRemovido: toyStoryParaRemover
   });
 };
 
@@ -99,7 +106,7 @@ const updateToyStory = (req, res) => {
   if (isNaN(id)) {
     return res.status(400).json({
       success: false,
-      message: "ID deve ser um número válido!",
+      message: "ID deve ser um número válido!"
     });
   }
 
@@ -110,7 +117,7 @@ const updateToyStory = (req, res) => {
   if (!toyStoryExiste) {
     return res.status(404).json({
       success: false,
-      message: `Toy Story com ID ${id} não encontrado para atualização!`,
+      message: `Toy Story com ID ${id} não encontrado para atualização!`
     });
   }
 
@@ -118,15 +125,15 @@ const updateToyStory = (req, res) => {
   const toyStoryAtualizados = toyStorys.map((toyStory) =>
     toyStory.id === idParaEditar
       ? {
-          ...toyStory,
-          ...(nome && { nome }),
-          ...(tipo && { tipo }),
-          ...(anoFabricacao && { anoFabricacao: parseInt(anoFabricacao) }),
-          ...(cor && { cor }),
-          ...(quantidadeEstoque && {
-            quantidadeEstoque: parseInt(quantidadeEstoque),
-          }),
-        }
+        ...toyStory,
+        ...(nome && { nome }),
+        ...(tipo && { tipo }),
+        ...(anoFabricacao && { anoFabricacao: parseInt(anoFabricacao) }),
+        ...(cor && { cor }),
+        ...(quantidadeEstoque && {
+          quantidadeEstoque: parseInt(quantidadeEstoque),
+        }),
+      }
       : toyStory
   );
 
@@ -139,7 +146,7 @@ const updateToyStory = (req, res) => {
   res.status(200).json({
     success: true,
     message: `Dados do Toy Story ID ${id} atualizados com sucesso!`,
-    toyStory: toyStoryNovo,
+    toyStory: toyStoryNovo
   });
 };
 
